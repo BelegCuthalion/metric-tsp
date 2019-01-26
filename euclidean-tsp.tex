@@ -1,0 +1,331 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Focus Beamer Presentation
+% LaTeX Template
+% Version 1.0 (8/8/18)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Pasquale Africa (https://github.com/elauksap/focus-beamertheme) with modifications by 
+% Vel (vel@LaTeXTemplates.com)
+%
+% Template license:
+% GNU GPL v3.0 License
+%
+% Important note:
+% The bibliography/references need to be compiled with bibtex.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{beamer}
+
+\usetheme{focus} % Use the Focus theme supplied with the template
+% Add option [numbering=none] to disable the footer progress bar
+% Add option [numbering=fullbar] to show the footer progress bar as always full with a slide countx
+
+
+\definecolor{main}{RGB}{55, 135, 177}
+\definecolor{text}{RGB}{57, 100, 131}
+\definecolor{background}{RGB}{255, 255, 255}
+
+\addtobeamertemplate{block begin}{%
+	\setlength{\textwidth}{0.9\textwidth}%
+}{}
+
+\addtobeamertemplate{block alerted begin}{%
+	\setlength{\textwidth}{0.9\textwidth}%
+}{}
+
+\addtobeamertemplate{block example begin}{%
+	\setlength{\textwidth}{0.9\textwidth}%
+}{}
+
+\setbeamercovered{transparent}
+
+%------------------------------------------------
+
+\usepackage{booktabs} % Required for better table rules
+\usepackage{tikz}
+\usepackage{xepersian}
+\settextfont{Vazir}
+\setsansfont{FreeSerif}
+\renewcommand{\baselinestretch}{1.3}
+
+\title{\rl{مسئله‌ی فروشنده‌ی دوره‌گرد}}
+
+\subtitle{\rl{یک الگوریتمِ} PTAS \rl{برای حالت اقلیدسی}}
+
+\author{\rl{علیرضا محمودیان}}
+
+\titlegraphic{\includegraphics[scale=.21]{Images/tu-logo-hckd.png}}
+
+\institute{\rl{	دانشکده‌ی ریاضی، آمار و علومِ کامپیوتر \\ دانشگاهِ تهران}}
+
+\date{\rl{دی ۱۳۹۷}}
+
+
+\begin{document}
+
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\begin{frame}{\rl{مسئله‌ی فروشنده‌ی دوره‌گرد}}
+    \begin{flushright}\rl{
+    	\begin{block}{مسئله}
+             پیداکردنِ دورِ همیلتونی با هزینه‌ی کمینه
+    	\end{block}
+        $\bullet$ در حالتِ کلی تقریب‌پذیر نیست. \\
+        $\bullet$ تابعِ هزینه‌ی متریک $~\leftarrow~$  تقریب با فاکتورِ ۳/۲ \\
+        $\bullet$ تابعِ هزینه‌ی اقلیدسی $~\leftarrow~$ PTAS
+    }\end{flushright}
+\end{frame}
+
+\begin{frame}{\rl{الگوریتمِ :PTAS ایده‌ی اصلی}}
+	\begin{flushright}
+		$\blacksquare$ \rl{ساختِ نمونه‌ی تقریب‌پذیر از روی نمونه‌ی اصلی} \\
+		\pause
+		$\bullet~~~~~~~~~$ \rl{ هزینه‌ی دورِ بهینه‌ی نمونه‌ی تقریب‌پذیر با هر تقریبِ دلخواه به\\
+			$~~~~~~~~~~~$ جوابِ اصلی نزدیک می‌شود (PTAS)} \\
+		\pause
+		$\blacksquare$ \rl{بدست‌آوردنِ جوابِ خوش‌رفتار در زمانِ چندجمله‌ای} (DP) \\
+		\pause
+		$\bullet~~~~~~~~~$ \rl{جوابِ خوش‌رفتار PTAS نیست} \\
+		\pause
+		$\blacksquare$ \rl{وجود جوابِ PTAS با تحلیلِ تصادفی}
+	\end{flushright}
+\end{frame}
+
+\section{\rl{نمونه‌ی تقریب‌پذیر}}
+
+\begin{frame}[t]{\rl{نمونه‌ی تقریب‌پذیر}}
+	\begin{flushright}\rl{
+		\begin{block}{تعریف}
+            \begin{enumerate}
+            	\item اندازه‌ی نمونه، $n$، توانی از ۲ باشد \\
+            	\pause
+                \item مختصاتِ هر گره اعدادی صحیح در بازه‌ی $[0, O(n)]^d$ باشند \\
+                \pause
+                \item یال با هزینه‌ی کم‌تر از ۴ نداشته باشد
+            \end{enumerate}
+		\end{block}
+	}\end{flushright}
+\end{frame}
+
+\begin{frame}[t]{\rl{نمونه‌ی تقریب‌پذیر: ساخت}}
+	\rl{
+		\begin{columns}[onlytextwidth]
+			\column{0.4\textwidth}
+			\flushleft
+			\input{diag/1.tex}
+			\column{0.6\textwidth}
+			\flushright
+			$\bullet$ به نمونه‌ی اولیه به تعدادِ کافی گره‌ی تکراری می‌افزاییم تا اندازه‌ی آن توانی از دو شود.\\
+			\pause
+			$\bullet$ آن را با کوچک‌ترین مربعِ ممکن محصور می‌کنیم.\\
+			\pause
+			$\bullet$ برای $\epsilon$ِ زوج،  نمونه را تاجایی بزرگ می‌کنیم که طولِ ضلعِ مربع برابر با
+			$8n/\epsilon$ شود.\\
+			\pause
+			$\blacksquare$ واضح است که این کار دورِ بهینه را تغییر نمی‌دهد.
+		\end{columns}
+	}
+\end{frame}
+
+
+\begin{frame}[t]{\rl{نمونه‌ی تقریب‌پذیر: ساخت}}
+	\rl{
+		\begin{columns}[onlytextwidth]
+			\column{0.4\textwidth}
+			\flushleft
+			\input{diag/2.tex}
+			\column{0.6\textwidth}
+			\flushright
+			$\bullet$ هر گره را به مختصاتِ مضربِ ۴ قبلی می‌بریم.\\
+			\pause
+			$\blacksquare$ هر گره حداکثر ۴ واحد جابه‌جا می‌شود.\\
+			\pause
+			$\blacksquare$ هزینه‌ی هر یال حداکثر ۸ واحد تغییر می‌کند.\\
+			\pause
+			$\blacksquare$ هزینه‌ی یک دورِ همیلتونی حداکثر $8 n = \epsilon L$ تغییر می‌کند.
+		\end{columns}
+	}
+\end{frame}
+
+\begin{frame}[t]{\rl{نمونه‌ی تقریب‌پذیر: تقریبِ دل‌حواه}}
+	\rl{
+		\begin{block}{تمرین ۱}
+			برای هر نمونه‌ی دل‌خواهِ ETSP، جوابِ نمونه‌ی تقریب‌پذیر، $(1+\epsilon)$-تقریبِ جوابِ اصلی برای هر $\epsilon$ِ دل‌خواه است.
+		\end{block}
+	\begin{flushright}
+		\pause
+		\emph{برهان:}
+		\[ L \leq OPT_{Orig} \]
+		\[ OPT_{Apx} - OPT_{Orig} \leq \epsilon L \]
+		\[ \Rightarrow OPT_{Apx} \leq (1 + \epsilon) OPT_{Orig}  ~~~\square \]
+		\\
+		\pause
+		$\bullet$ پس از این بدون کاستن از کلیت، فرض می‌کنیم نمونه تقریب‌پذیر است.
+	\end{flushright}
+	}
+\end{frame}
+
+\section{\rl{جوابِ خوش‌رفتار}}
+
+\begin{frame}[t]{\rl{ تقسیم‌بندیِ پایه}}
+	\begin{columns}[onlytextwidth]
+		\column{0.5\textwidth}
+		\flushleft
+		\includegraphics[width=\linewidth]{Images/levels.png}
+		\column{0.5\textwidth}
+		\flushright
+		\includegraphics[width=\linewidth]{Images/tree.png}
+	\end{columns}
+	\rl{
+	\begin{flushright}
+		$\bullet$ مربعِ نمونه را به صورتِ بازگشتی به چهار مربعِ اصلی تقسیم می‌کنیم.\\
+		\pause
+		$\bullet$ چون $L$ توانی از ۲ است، پس از $lg(L) = O(lg(n))$ سطح به مربع‌های اصلیِ یکه می‌رسیم.\\
+		\pause
+		$\bullet$ به این ساختار، تقسیم‌بندیِ پایه می‌گوییم.
+	\end{flushright}
+	}
+\end{frame}
+
+\begin{frame}[t]{\rl{ درگاه‌ها}}
+	\begin{columns}[onlytextwidth]
+		\column{0.5\textwidth}
+		\flushleft
+		\includegraphics[width=\linewidth]{Images/portals.png}
+		\column{0.5\textwidth}
+		\flushright
+		\rl{
+		\begin{flushright}
+			$\bullet$ توانی از ۲ از بازه‌ی $[lg(L)/\epsilon, 2lg(L)/\epsilon]$ انتخاب کرده و آن را $m$ می‌نامیم.\\
+			\pause
+			$\bullet$ روی خطوطِ سطحِ $i$-ام، $2m^i$ درگاه با فاصله‌ی برابر اضافه می‌کنیم.\\
+			\pause
+			$\bullet$ هر مربعِ اصلیِ سطحِ $i$-ام ۴ درگاه در گوشه‌ها و $m-1$ درگاه روی هر ضلع خواهد داشت.\\
+			\pause
+			$\bullet$ مربعِ بزرگ‌تر آن‌ها را بامربع‌های درونش به اشتراک می‌گذارد.
+		\end{flushright}
+		}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[t]{\rl{دورِ خوش‌رفتار}}
+	\begin{flushright} \rl{
+		\begin{block}{تعریف}
+			\begin{enumerate}
+				\item دقیقاً یک بار از هر گره‌ی اصلی عبور کند. \\
+				\pause
+				\item حداکثر دو بار از هر درگاه عبور کند. \\
+				\pause
+				\item تنها در درگاه‌ها خطوطِ تقسیم را قطع کند. \\
+				\pause
+				\item تنها در درگاه‌ها خودش را قطع کند.
+			\end{enumerate}
+		\end{block}
+		\pause
+		\emph{لم ۲}$\bullet$ به دلیلِ خاصیتِ مثلثی، ویژگیِ ۲ را می‌توان به کمکِ میانبرزدن تضمین کرد.
+	}\end{flushright}
+\end{frame}
+
+
+\begin{frame}[t]{\rl{دورِ خوش‌رفتار}}
+	\begin{columns}[onlytextwidth]
+		\column{0.6\textwidth}
+		\flushleft
+		\includegraphics[width=\linewidth]{Images/route.png}
+		\column{0.4\textwidth}
+		\flushright \rl{
+			مثال ( $m = 2$ )
+		}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[t]{\rl{دورِ خوش‌رفتار}}
+	\begin{flushright}
+			\begin{exampleblock}{\rl{لم ۳}}
+		\rl{		دورِ خوش‌رفتارِ بهینه در زمانِ چندجمله‌ای نسبت به اندازه‌ی ورودی قابلِ محاسبه است.}
+			\end{exampleblock}
+			\pause
+			\emph{\rl{برهان:}}\\
+			\rl{فرض کنید $\tau$ چنین دوری باشد. \\
+				اولاً دقت کنید تعدادِ مربع‌های اصلی $O(n)$ است.  ابتدا حالاتِ مختلفِ قطعاتِ $\tau$ که می‌تواند داخلِ یک مربعِ اصلی باشد را می‌شماریم.}
+	\end{flushright}
+\end{frame}
+
+\begin{frame}[t]{\rl{دورِ خوش‌رفتار: اثباتِ لمِ ۳}}
+	\flushright{\rl { $\bullet$
+			درگاه‌های ورودی/خروجی
+			 $\times$ 
+			   جفت‌های ممکن
+			  $=$ 
+			 حالاتِ مختلفِ
+		  }}
+	\begin{columns}[onlytextwidth]
+		\column{0.4\textwidth}
+		\flushleft
+		\includegraphics[width=\linewidth]{Images/pairs.png}
+		\column{0.6\textwidth}
+		\flushright \rl{
+			$\bullet$ هر مربعِ اصلی حداکثر $4m$ درگاه دارد.\\
+			\pause
+			$\bullet$ هر درگاه ۰، ۱ یا ۲ بار استفاده می‌شود.\\
+			\pause
+			$\Leftarrow$ تعداد حالاتِ مختلفِ استفاده درگاه‌ها برای ورود/خروجِ $ \geq \tau$
+			\[ 3^{4m} = n^{O(1/\epsilon	)} \]
+		}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[t]{\rl{دورِ خوش‌رفتار: اثباتِ لمِ ۳}}
+	\flushright{\rl { $\bullet$
+			درگاه‌های ورودی/خروجی
+			$\times$ 
+			جفت‌های ممکن
+			$=$ 
+			حالاتِ مختلفِ
+	}}
+	\begin{columns}[onlytextwidth]
+		\column{0.4\textwidth}
+		\flushleft
+		\includegraphics[width=\linewidth]{Images/paths.png}
+		\column{0.6\textwidth}
+		\flushright \rl{
+			$\bullet$ مسیر اصلی نمی‌تواند خود را قطع کند.\\
+			\pause
+			$\bullet$ ورود و خروجِ $\tau$ از طریقِ درگاه‌ها تابعِ قاعده‌ی دایک خواهد بود.\\
+			\pause
+			$\Leftarrow$ تعداد حالاتِ مختلفِ جفت‌شدنِ درگاه‌ها $\geq$
+			\[ C_{4m} = 2^{O(m)} = n^{O(1/\epsilon	)} \]
+		}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[t]{\rl{دورِ خوش‌رفتار: یافتن بهینه}}
+	\begin{flushright}\rl{
+		\begin{block}{الگوریتمِ \lr{dynamic programming}}
+			\begin{enumerate}
+				\item  برای هر مربعِ اصلی در درختِ تقسیم‌بندیِ پایه \\
+				\pause
+				\item مختصاتِ هر گره اعدادی صحیح در بازه‌ی $[0, O(n)]^d$ باشند \\
+				\pause
+				\item یال با هزینه‌ی کم‌تر از ۴ نداشته باشد
+			\end{enumerate}
+		\end{block}
+}\end{flushright}
+\end{frame}
+
+\begin{frame}[noframenumbering]{\rl{نوآوری‌های اخیر}}
+	\includegraphics[width=\linewidth]{Images/travelling_salesman_problem.png}
+\end{frame}
+
+\end{document}
