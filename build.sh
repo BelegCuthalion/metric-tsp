@@ -1,4 +1,7 @@
-xelatex -synctex=1 -output-directory=./out/ -interaction=nonstopmode *.tex
+for file in *.tex;
+do
+    xelatex -synctex=1 -output-directory=./out/ -interaction=nonstopmode $file;
+done
 mkdir -p deploy/
 mv ./out/*.pdf deploy/
 
